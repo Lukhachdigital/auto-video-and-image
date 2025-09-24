@@ -1,0 +1,5 @@
+{
+  "name": "Google AI LỮ KHÁCH",
+  "description": "A simple user interface to generate images from text prompts using the Google Gemini API.",
+  "requestFramePermissions": []
+}
