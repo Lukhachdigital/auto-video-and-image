@@ -17,6 +17,26 @@ interface WorkflowTabProps {
   apiKey: string;
 }
 
+const parseAndEnhanceErrorMessage = (rawError: unknown): string => {
+    let message = rawError instanceof Error ? rawError.message : String(rawError);
+    try {
+        const errorJson = JSON.parse(message);
+        if (errorJson.error && errorJson.error.message) {
+            message = errorJson.error.message;
+        }
+    } catch (e) {
+        // Not a JSON string
+    }
+
+    if (message.includes("API key not valid")) {
+        return "API Key không hợp lệ. Vui lòng kiểm tra lại key trong tab 'Profile' và chắc chắn rằng nó chính xác.";
+    }
+    if (message.includes("accessible to billed users")) {
+        return "Tính năng này yêu cầu tài khoản Google AI đã bật thanh toán. Vui lòng truy cập dự án Google Cloud của bạn để thiết lập thanh toán.";
+    }
+    return message;
+};
+
 const ApiKeyPrompt: React.FC = () => (
     <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 text-center">
       <h3 className="text-lg font-bold text-white mb-2">Yêu cầu API Key</h3>
@@ -37,7 +57,8 @@ const WorkflowTab: React.FC<WorkflowTabProps> = ({ addLog, apiKey }) => {
     const files = event.target.files;
     if (!files) return;
 
-    const newTasks: VideoTask[] = Array.from(files).map(file => {
+    // FIX: Explicitly type `file` as `File` to resolve type inference issue.
+    const newTasks: VideoTask[] = Array.from(files).map((file: File) => {
       const existingTask = tasks.find(t => t.imageFile.name === file.name);
       return existingTask || {
         id: `${file.name}-${Date.now()}`,
@@ -157,7 +178,7 @@ const WorkflowTab: React.FC<WorkflowTabProps> = ({ addLog, apiKey }) => {
         addLog(`[${taskName}] Task completed successfully.`, 'success');
     } catch (error) {
         console.error(`[${taskName}] Task failed:`, error);
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage = parseAndEnhanceErrorMessage(error);
         addLog(`Error in task "${taskName}": ${errorMessage}`, 'error');
         setTaskStatus(task.id, 'Error', errorMessage);
     }
@@ -271,6 +292,9 @@ const WorkflowTab: React.FC<WorkflowTabProps> = ({ addLog, apiKey }) => {
                                   <p className="font-semibold text-white truncate" title={task.imageFile.name}>{task.imageFile.name}</p>
                                   <p className="text-sm text-gray-400 truncate" title={task.prompt}>{task.prompt || 'Waiting for prompt...'}</p>
                                   <p className={`text-xs font-mono font-bold ${getStatusColor(task.status)}`}>{task.status}</p>
+                                  {task.status === 'Error' && task.error && (
+                                    <p className="text-xs text-red-400 mt-1 truncate" title={task.error}>{task.error}</p>
+                                  )}
                               </div>
                               <div className="flex flex-col space-y-1">
                                   <Button variant="secondary" className="px-2 py-1 text-xs" onClick={() => moveTask(task.id, 'up')} disabled={index === 0}>↑</Button>
