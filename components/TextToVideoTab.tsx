@@ -21,6 +21,26 @@ interface TextToVideoTabProps {
   apiKey: string;
 }
 
+const parseAndEnhanceErrorMessage = (rawError: unknown): string => {
+    let message = rawError instanceof Error ? rawError.message : String(rawError);
+    try {
+        const errorJson = JSON.parse(message);
+        if (errorJson.error && errorJson.error.message) {
+            message = errorJson.error.message;
+        }
+    } catch (e) {
+        // Not a JSON string
+    }
+
+    if (message.includes("API key not valid")) {
+        return "API Key không hợp lệ. Vui lòng kiểm tra lại key trong tab 'Profile' và chắc chắn rằng nó chính xác.";
+    }
+    if (message.includes("accessible to billed users")) {
+        return "Tính năng này yêu cầu tài khoản Google AI đã bật thanh toán. Vui lòng truy cập dự án Google Cloud của bạn để thiết lập thanh toán.";
+    }
+    return message;
+};
+
 const ApiKeyPrompt: React.FC = () => (
     <div className="bg-slate-900/50 p-6 rounded-lg border border-slate-700 text-center">
       <h3 className="text-lg font-bold text-white mb-2">Yêu cầu API Key</h3>
@@ -83,7 +103,7 @@ const TextToVideoTab: React.FC<TextToVideoTabProps> = ({ addLog, apiKey }) => {
         addLog(`[Task ${index+1}] Video ready!`, 'success');
 
      } catch(error) {
-        const errorMessage = error instanceof Error ? error.message : String(error);
+        const errorMessage = parseAndEnhanceErrorMessage(error);
         addLog(`[Task ${index+1}] Error: ${errorMessage}`, 'error');
         setResults(prev => prev.map((res, idx) => 
             idx === index ? { ...res, status: 'error', error: errorMessage } : res
