@@ -125,7 +125,7 @@ const SettingsTab: React.FC<SettingsTabProps> = ({ apiKey, onApiKeyChange }) => 
       <div className="max-w-md mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
         <SocialLink platform="Youtube" handle="@lukhach-digital" url="https://youtube.com/@lukhach-digital" icon={YoutubeIcon} />
         <SocialLink platform="Facebook" handle="huynhxuyenson" url="https://facebook.com/huynhxuyenson" icon={FacebookIcon} />
-        <SocialLink platform="Tiktok" handle="@lamyoutubeai" url="https://tiktok.com/lamyoutubeai" icon={TiktokIcon} />
+        <SocialLink platform="Tiktok" handle="@lamyoutubeai" url="https://tiktok.com/@lamyoutubeai" icon={TiktokIcon} />
         <SocialLink platform="Zalo" handle="0979.007.367" url="https://zalo.me/0979007367" icon={ZaloIcon} />
       </div>
     </div>
