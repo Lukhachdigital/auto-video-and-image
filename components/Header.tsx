@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const Header: React.FC = () => {
@@ -19,12 +20,23 @@ const Header: React.FC = () => {
           <a href="https://zalo.me/0979007367" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
             0979.007.367
           </a>
-          <span className="text-yellow-400"> | Tool TẶNG dùng MIỄN PHÍ | Không mua bán!</span>
+          <span className="text-yellow-400"> | TẶNG MIỄN PHÍ |</span>
         </h1>
       </div>
       
-      {/* Right Side: New Button */}
-      <div className="flex-shrink-0 text-center">
+      {/* Right Side: Buttons */}
+      <div className="flex-shrink-0 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a 
+          href="https://lamyoutubeai.com/vip" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block px-5 py-3 font-bold text-white text-base rounded-lg shadow-lg transform transition-all duration-300 ease-in-out
+                     bg-gradient-to-r from-teal-400 to-blue-500 
+                     hover:scale-110 hover:shadow-2xl hover:from-teal-500 hover:to-blue-600
+                     focus:outline-none focus:ring-4 focus:ring-blue-300"
+        >
+          💬 Giải Đáp - Hỗ Trợ
+        </a>
         <a 
           href="https://lamyoutubeai.com/academy" 
           target="_blank" 
