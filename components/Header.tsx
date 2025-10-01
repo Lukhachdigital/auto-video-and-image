@@ -27,7 +27,7 @@ const Header: React.FC = () => {
       {/* Right Side: Buttons */}
       <div className="flex-shrink-0 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a 
-          href="https://lamyoutubeai.com/vip" 
+          href="http://lamyoutubeai.com/support" 
           target="_blank" 
           rel="noopener noreferrer"
           className="inline-block px-5 py-3 font-bold text-white text-base rounded-lg shadow-lg transform transition-all duration-300 ease-in-out
