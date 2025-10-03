@@ -46,7 +46,7 @@ const Header: React.FC = () => {
                      hover:scale-110 hover:shadow-2xl hover:from-orange-600 hover:via-red-600 hover:to-pink-600
                      focus:outline-none focus:ring-4 focus:ring-red-300"
         >
-          ✨ Tham gia khóa học AI ✨
+          Học Youtube và AI
         </a>
       </div>
     </header>
