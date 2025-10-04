@@ -27,6 +27,17 @@ const Header: React.FC = () => {
       {/* Right Side: Buttons */}
       <div className="flex-shrink-0 flex flex-col sm:flex-row items-center justify-center gap-4">
         <a 
+          href="https://lamyoutubeai.com/mua-video-giao-trinh" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="inline-block px-5 py-3 font-bold text-white text-base rounded-lg shadow-lg transform transition-all duration-300 ease-in-out
+                     bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 
+                     hover:scale-110 hover:shadow-2xl hover:from-purple-700 hover:via-pink-600 hover:to-red-600
+                     focus:outline-none focus:ring-4 focus:ring-pink-300"
+        >
+          Giáo trình bức phá
+        </a>
+        <a 
           href="http://lamyoutubeai.com/support" 
           target="_blank" 
           rel="noopener noreferrer"
